@@ -1,0 +1,364 @@
+* {
+	user-select: none;
+}
+#icons, #images {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+.icon {
+	transform: scale(0.8);
+}
+.icon, #icons .guessed {
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+	margin: 8px 18px;
+	background-image: url('images/icons.jpg');
+	background-repeat: no-repeat;
+	filter: grayscale(0.8);
+}
+.icon:hover {
+	filter: grayscale(0);
+	transition-duration: 0.5s;
+}
+.icon.selected{
+	transform: scale(1);
+}
+.icon.selected, #icons .guessed {
+	filter: grayscale(0);
+}
+
+.image, #images .guessed {
+	width: 250px;
+	height: 100px;
+	margin-top: 15px;
+    box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: stretch;
+	font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+	font-size: 35px;
+	text-align: center;
+	text-transform: uppercase;
+	color: #131313;
+    text-shadow: 2px 2px 0px #fff,
+    			 4px 4px 0px rgba(0, 0, 0, 0.2);
+    transition-duration: 0.5s;
+}
+p {
+	margin: 0;
+}
+.image:hover, .image.selected, #images .guessed {
+	transition-duration: 0.5s;	
+	color: #131313;
+    text-shadow: 2px 2px 0px #fff,
+    			 4px 4px 0px rgba(0, 0, 0, 0.2);
+    animation: gradientBackground 3s infinite; /* animation-name animation-duration animation-timing-function animadelay animation-iteration-count animation-direction; */
+    opacity: 0.5;
+}
+.image.selected, #images .guessed{
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: flex-end;
+	font-size: 20px;
+	transition-duration: 0.5s;
+	padding-right: 15px;
+    padding-bottom: 5px;
+}
+.guessed {
+	border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+@keyframes gradientBackground {
+	0% {
+		background-color: rgba(255, 222, 222, 1);
+   	 	box-shadow: 0 -100px 100px -50px rgba(185, 213, 184, 1) inset,
+   	 				0 3px 6px rgba(0, 0, 0, 0.16),
+    				0 3px 6px rgba(0, 0, 0, 0.23);
+	}
+	20% {
+		background-color: rgba(255, 246, 222, 1);
+   	 	box-shadow: 0 -100px 100px -50px rgba(165, 167, 187, 1) inset,
+   	 				0 3px 6px rgba(0, 0, 0, 0.16),
+    				0 3px 6px rgba(0, 0, 0, 0.23);
+	}
+	40% {
+		background-color: rgba(233, 241, 210, 1);
+   	 	box-shadow: 0 -100px 100px -50px rgba(201, 174, 193, 1) inset,
+   	 				0 3px 6px rgba(0, 0, 0, 0.16),
+    				0 3px 6px rgba(0, 0, 0, 0.23);
+	}
+	60% {
+		background-color: rgba(138, 154, 158, 1);
+   	 	box-shadow: 0 -100px 100px -50px rgba(255, 238, 221, 1)inset,
+   	 				0 3px 6px rgba(0, 0, 0, 0.16),
+    				0 3px 6px rgba(0, 0, 0, 0.23);
+	}
+	80% {
+		background-color: rgba(162, 172, 173, 1);
+   	 	box-shadow: 0 -100px 100px -50px rgba(255, 252, 221, 1) inset,
+   	 				0 3px 6px rgba(0, 0, 0, 0.16),
+    				0 3px 6px rgba(0, 0, 0, 0.23);	}
+	100% {
+		background-color: rgba(255, 222, 222, 1);
+   	 	box-shadow: 0 -100px 100px -50px rgba(185, 213, 184, 1) inset,
+   	 				0 3px 6px rgba(0, 0, 0, 0.16),
+    				0 3px 6px rgba(0, 0, 0, 0.23);
+	}
+}
+
+
+.dog {
+	background-position: -100px 0;
+}
+.squirrel {
+	background-position: -200px 0;
+}
+.mouse {
+	background-position: -300px 0;
+}
+.cow {
+	background-position: -400px 0;
+}
+.horse {
+	background-position: -500px 0;
+}
+.sheep {
+	background-position: -600px 0;
+}
+.hamster {
+	background-position: -700px 0;
+}
+.fox {
+	background-position: 0 -100px;
+}
+.bear {
+	background-position: -100px -100px;
+}
+.racoon {
+	background-position: -200px -100px;
+}
+.tiger {
+	background-position: -300px -100px;
+}
+.lion {
+	background-position: -400px -100px;
+}
+.wolf {
+	background-position: -500px -100px;
+}
+.deer {
+	background-position: -600px -100px;
+}
+.elk {
+	background-position: -700px -100px;
+}
+.elephant {
+	background-position: 0 -200px;
+}
+.camel {
+	background-position: -100px -200px;
+}
+.boar {
+	background-position: -200px -200px;
+}
+.rabbit {
+	background-position: -300px -200px;
+}
+.donkey {
+	background-position: -400px -200px;
+}
+.giraffe {
+	background-position: -500px -200px;
+}
+.hippo {
+	background-position: -600px -200px;
+}
+.rhinoceros {
+	background-position: -700px -200px;
+}
+.panda {
+	background-position: 0 -300px;
+}
+.monkey {
+	background-position: -100px -300px;
+}
+.goat {
+	background-position: -200px -300px;
+}
+.hyena {
+	background-position: -300px -300px;
+}
+.kangaroo {
+	background-position: -400px -300px;
+}
+.porcupine {
+	background-position: -500px -300px;
+}
+.zebra {
+	background-position: -600px -300px;
+}
+.hedgehog {
+	background-position: -700px -300px;
+}
+
+.unclickable {
+	pointer-events: none;
+}
+
+#images .guessed {
+	animation: none;
+    opacity: 1;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+#images .guessed.cat {
+	background-image: url('images/cat.jpg');
+}
+#images .guessed.dog {
+	background-image: url('images/dog.jpg');
+}
+#images .guessed.squirrel {
+	background-image: url('images/squirrel.jpg');
+}
+#images .guessed.mouse {
+	background-image: url('images/mouse.jpg');
+	background-position-y: 0;
+}
+#images .guessed.cow {
+	background-image: url('images/cow.jpg');
+	background-position-y: 0;
+}
+#images .guessed.horse {
+	background-image: url('images/horse.jpg');
+	background-position-y: 0;
+}
+#images .guessed.sheep {
+	background-image: url('images/sheep.jpg');
+	background-position-y: 0;
+}
+#images .guessed.hamster {
+	background-image: url('images/hamster.jpg');
+}
+#images .guessed.fox {
+	background-image: url('images/fox.jpg');
+}
+#images .guessed.bear {
+	background-image: url('images/bear.jpg');
+}
+#images .guessed.racoon {
+	background-image: url('images/racoon.jpg');
+}
+#images .guessed.tiger {
+	background-image: url('images/tiger.jpg');
+	background-position-y: 0;
+}
+#images .guessed.lion {
+	background-image: url('images/lion.jpg');
+}
+#images .guessed.wolf {
+	background-image: url('images/wolf.jpg');
+}
+#images .guessed.deer {
+	background-image: url('images/deer.jpg');
+}
+#images .guessed.elk {
+	background-image: url('images/elk.jpg');
+}
+#images .guessed.elephant {
+	background-image: url('images/elephant.jpg');
+	background-position-y: 0;
+}
+#images .guessed.camel {
+	background-image: url('images/camel.jpg');
+	background-position-y: 0;
+}
+#images .guessed.boar {
+	background-image: url('images/boar.jpg');
+	background-position-y: 0;
+}
+#images .guessed.rabbit {
+	background-image: url('images/rabbit.jpg');
+}
+#images .guessed.donkey {
+	background-image: url('images/donkey.jpg');
+}
+#images .guessed.giraffe {
+	background-image: url('images/giraffe.jpg');
+	background-position-y: 0;
+}
+#images .guessed.hippo {
+	background-image: url('images/hippo.jpg');
+}
+#images .guessed.rhinoceros {
+	background-image: url('images/rhinoceros.jpg');
+}
+#images .guessed.panda {
+	background-image: url('images/panda.jpg');
+	background-position-y: 0;
+}
+#images .guessed.monkey {
+	background-image: url('images/monkey.jpg');
+}
+#images .guessed.goat {
+	background-image: url('images/goat.jpg');
+	background-position-y: 0;
+}
+#images .guessed.hyena {
+	background-image: url('images/hyena.jpg');
+	background-position-y: 0;
+}
+#images .guessed.kangaroo {
+	background-image: url('images/kangaroo.jpg');
+}
+#images .guessed.porcupine {
+	background-image: url('images/porcupine.jpg');
+}
+#images .guessed.zebra {
+	background-image: url('images/zebra.jpg');
+	background-position-y: 0;
+}
+#images .guessed.hedgehog {
+	background-image: url('images/hedgehog.jpg');
+}
+
+#messages {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	pointer-events: none;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: stretch;	
+}
+.showMessage {
+	background-color: rgba(255, 255, 255, 0.5);
+}
+.showMessage p, button {
+	font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+	font-size: 10vw;
+	text-align: center;
+	text-transform: uppercase;
+	color: #131313;
+    text-shadow: 2px 2px 0px #fff,
+    			 4px 4px 0px rgba(0, 0, 0, 0.2);
+}
+#messages.showLastMessage {
+	pointer-events: auto;
+}
+button {
+	width: 50%;
+    margin: 0 auto;
+    font-size: 5vw;
+    border-radius: 20px;
+    animation: gradientBackground 3s infinite;
+}
+button:focus {
+	outline: 0;
+}
