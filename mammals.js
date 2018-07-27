@@ -96,10 +96,10 @@ function compareAnimals() {
 		selectedImage[0].classList.remove('selected');
 		selectedImage[0].classList.remove('image');
 		selectedImage[0].classList.add('guessed');
-		attemptMessage('Yes!');		
+		attemptMessage('Да!');		
 	}
 	else {
-		attemptMessage('No!');
+		attemptMessage('Нет!');
 	}
 	document.getElementById('icons').classList.remove('unclickable');
 	document.getElementById('images').classList.remove('unclickable');
@@ -121,7 +121,7 @@ function attemptMessage(text) {
 function startAgain() {
 		document.getElementById('messages').classList.add('showMessage');
 		document.getElementById("messages").classList.add('showLastMessage');
-		document.getElementById("messages").innerHTML = '<p>All are guessed!</p> <button id="clickForReload">Play again?</button>';
+		document.getElementById("messages").innerHTML = '<p>Всё отгадано!</p> <button id="clickForReload">Начать сначала?</button>';
 		document.getElementById("clickForReload").onclick = function() {
 			location.reload();
 		}
