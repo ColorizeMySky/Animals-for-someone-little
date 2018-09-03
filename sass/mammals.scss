@@ -1,0 +1,147 @@
+* {
+	user-select: none;
+}
+
+$iconWidth: 100px;
+$mammals: bear, boar, camel, cat, cow, deer, dog, donkey,
+		  elephant, elk, fox, giraffe, goat, hamster, hedgehog, hippo,
+		  horse, hyena, kangaroo, lion, monkey, mouse, panda, porcupine,
+		  rabbit, racoon, rhinoceros, sheep, squirrel, tiger, wolf, zebra;
+$positionY: boar, camel, cow, deer, elk, giraffe, goat, horse, hyena, mouse, panda, sheep, zebra; //tiger, elephant
+$boxShadow: 0 3px 6px rgba(0, 0, 0, 0.16),
+    		0 3px 6px rgba(0, 0, 0, 0.23);
+
+@mixin center {
+	display: block;
+	margin: 0 auto;
+}
+@mixin text {
+	font: {
+		family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+		size: 35px;
+	}
+	text: {
+		align: center;
+		transform: uppercase;	
+    	shadow: 2px 2px 0px #fff,
+    			4px 4px 0px rgba(0, 0, 0, 0.2);
+   	}
+   	color: #131313;
+}
+
+.icon {
+	@include center;
+	width: $iconWidth;
+	height: $iconWidth;
+	margin-top: $iconWidth/2;
+}
+
+#images {
+	display: flex;
+	flex-direction: column;
+}
+.image {
+	@include center;
+	@include text;
+	width: 70%;
+	max-width: $iconWidth*3;
+	height: $iconWidth*1.2;
+	margin-top: $iconWidth/5;
+	background-size: cover;
+    background-position: center;
+
+	&:hover, &:focus {
+		animation: gradientBackground 3s infinite; /* animation-name animation-duration animation-timing-function animadelay animation-iteration-count animation-direction; */
+	}
+}
+
+@each $animal in $mammals{
+  	.guessed.#{$animal} {
+    	background-image: url('../img/#{$animal}.jpg');
+    	box-shadow: $boxShadow;
+	}	
+
+	$i: index($mammals, $animal);
+	.icon.#{$animal} {
+		background-image: url('../img/icons.jpg');
+    	background-position: (-100px*$i)+100px 0;
+	}
+}
+@each $img in $positionY {
+	.#{$img} {
+		background-position-y: 0;
+	}
+}
+.chosen {
+	animation: gradientBackground 3s infinite;
+}
+
+#images .guessed {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: flex-end;
+	font-size: 20px;
+	transition-duration: 0.5s;
+
+	& p {
+		margin: 10px;
+	}
+}
+
+.unclickable{
+	pointer-events: none;
+}
+.message {
+	@include text;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+    justify-content: center;
+	width: $iconWidth*2.5;
+	margin: 0 auto;
+	margin-top: $iconWidth/4;
+	transition-duration: 0.5s;
+	box-shadow: $boxShadow;
+	cursor: pointer;
+
+	& p:nth-child(2) {
+		margin-top: 0;
+	}
+}
+.invisible {
+	display: none;
+}
+
+@keyframes gradientBackground {
+	0% {
+		background-color: rgba(255, 222, 222, 1);
+   	 	box-shadow: 0 -100px 100px -50px rgba(185, 213, 184, 1) inset,
+   	 				$boxShadow;
+	}
+	20% {
+		background-color: rgba(255, 246, 222, 1);
+   	 	box-shadow: 0 -100px 100px -50px rgba(165, 167, 187, 1) inset,
+   	 				$boxShadow;
+	}
+	40% {
+		background-color: rgba(233, 241, 210, 1);
+   	 	box-shadow: 0 -100px 100px -50px rgba(201, 174, 193, 1) inset,
+   	 				$boxShadow;
+	}
+	60% {
+		background-color: rgba(138, 154, 158, 1);
+   	 	box-shadow: 0 -100px 100px -50px rgba(255, 238, 221, 1)inset,
+   	 				$boxShadow;
+	}
+	80% {
+		background-color: rgba(162, 172, 173, 1);
+   	 	box-shadow: 0 -100px 100px -50px rgba(255, 252, 221, 1) inset,
+   	 				$boxShadow;	
+   	 	}
+	100% {
+		background-color: rgba(255, 222, 222, 1);
+   	 	box-shadow: 0 -100px 100px -50px rgba(185, 213, 184, 1) inset,
+   	 				$boxShadow;
+	}
+}

@@ -1,128 +1,100 @@
-var iconsArray = document.getElementsByClassName('icon');
-var imagesArray = document.getElementsByClassName('image');
-iconsArray = Array.prototype.slice.call(iconsArray); //collection into array
-imagesArray = Array.prototype.slice.call(imagesArray);
-addFlexOrder(setRandomOrder(iconsArray));
-addFlexOrder(setRandomOrder(imagesArray));
+var mammals = ['bear', 'boar', 'camel', 'cat', 'cow', 'deer', 'dog', 'donkey',
+			   'elephant', 'elk', 'fox', 'giraffe', 'goat', 'hamster', 'hedgehog', 'hippo',
+			   'horse', 'hyena', 'kangaroo', 'lion', 'monkey', 'mouse', 'panda', 'porcupine',
+			   'rabbit', 'racoon', 'rhinoceros', 'sheep', 'squirrel', 'tiger', 'wolf', 'zebra'];
 
-//choose a icon of animal
-for (var i = 0; i < iconsArray.length; i++) {
-	iconsArray[i].onclick = function(){
-		if(this.classList.length > 2) {
-			var alredySelected = true;
-		}
-		else {
-			var alredySelected = false;
-		}
-		var selectedIcon = document.getElementsByClassName('icon selected');
-		selectedIcon = Array.prototype.slice.call(selectedIcon); //collection into array
-		for (var j = 0; j < selectedIcon.length; j++) {
-			selectedIcon[j].classList.remove('selected');
-		}
-		if (alredySelected == false) {
-			this.classList.add('selected');
-		}
-    	checkSelecting();
-	};
+var message = document.querySelector('.message');
+
+var control = mammals.slice();
+
+mammals.sort(compareRandom);
+step();
+
+function compareRandom(a, b) {
+  return Math.random() - 0.5;
 }
 
-//choose a image of animal
-for (var i = 0; i < imagesArray.length; i++) {
-	imagesArray[i].onclick = function(){
-		if(this.classList.length > 2) {
-			var alredySelected = true;
-		}
-		else {
-			var alredySelected = false;
-		}
-		var selectedImage = document.getElementsByClassName('image selected');
-		selectedImage = Array.prototype.slice.call(selectedImage); //collection into array
-		for (var j = 0; j < selectedImage.length; j++) {
-			selectedImage[j].classList.remove('selected');
-		}		
-    	if (alredySelected == false) {
-			this.classList.add('selected');
-		}   
-    	checkSelecting(); 	
-	};
-}
-
-
-//random shuffle of array elements
-function setRandomOrder(array) {
-	var currentIndex = array.length, temporaryValue, randomIndex;
-
-	// While there remain elements to shuffle...
-	while (0 !== currentIndex) {
-		// Pick a remaining element...
-		randomIndex = Math.floor(Math.random() * currentIndex);
-		currentIndex -= 1;
-		// And swap it with the current element.
-		temporaryValue = array[currentIndex];
-		array[currentIndex] = array[randomIndex];
-		array[randomIndex] = temporaryValue;
-	}
-	return array;
-}
-
-//add to flex-elements the css style 'order' 
-function addFlexOrder(array) {
-	for (var i = 0; i < array.length; i++) {
-		array[i].style.order = i;
-	}
-}
-
-//check if comparee is needed
-function checkSelecting() {
-	if ( (document.getElementsByClassName('icon selected').length > 0) && (document.getElementsByClassName('image selected').length > 0) ) {
-		setTimeout(compareAnimals(), 1000);
-	}
-}
-
-
-//block the click and compare animals
-function compareAnimals() {
-	document.getElementById('icons').classList.add('unclickable');
-	document.getElementById('images').classList.add('unclickable');
-
-	var selectedIcon = document.getElementsByClassName('icon selected');
-	selectedIcon = Array.prototype.slice.call(selectedIcon); //collection into array
-	var selectedImage = document.getElementsByClassName('image selected');
-	selectedImage = Array.prototype.slice.call(selectedImage); //collection into array
-	if (selectedIcon[0].classList.item(0) == selectedImage[0].classList.item(0) ) {
-		selectedIcon[0].classList.remove('selected');
-		selectedIcon[0].classList.remove('icon');
-		selectedIcon[0].classList.add('guessed');	
-		selectedImage[0].classList.remove('selected');
-		selectedImage[0].classList.remove('image');
-		selectedImage[0].classList.add('guessed');
-		attemptMessage('Yes!');		
+function step() {
+	if (mammals.length == 0) {
+		startAgain();
 	}
 	else {
-		attemptMessage('No!');
+		let current = mammals.pop();
+
+		let icon = document.querySelector('.icon');
+		icon.classList.remove(icon.classList[1]);
+		icon.classList.add(current);
+
+		let choose = randomTwo(control, current);
+		choose.push(current);
+		choose.sort(compareRandom);
+
+		message.classList.add('invisible');
+
+		let choosingBox = document.querySelectorAll('.image');
+
+		for (let i = 0; i < choosingBox.length; i++) {
+			choosingBox[i].classList.remove('unclickable', 'guessed', choosingBox[i].classList[1]);
+			choosingBox[i].classList.add(choose[i]);			
+			choosingBox[i].innerHTML = '<p>' + choose[i]+ '</p>';
+
+			choosingBox[i].addEventListener("click", function(){
+				this.classList.add('chosen');
+				let check = this.classList[1];
+				compare(check);
+			});
+		}
 	}
-	document.getElementById('icons').classList.remove('unclickable');
-	document.getElementById('images').classList.remove('unclickable');
 }
 
-function attemptMessage(text) {
-	document.getElementById("messages").innerHTML = '<p>' + text + '</p>';
-	document.getElementById('messages').classList.add('showMessage');
-	setTimeout(function() {
-		document.getElementById('messages').classList.remove('showMessage');
-		document.getElementById("messages").innerHTML = '';
-		if (document.getElementsByClassName('guessed').length == 64) {
-			setTimeout(startAgain(), 4000);
-		}
-	}, 2000);
+//choose two random from array
+function randomTwo(arr, mammal) {
+	do {
+		var first = arr[Math.floor(Math.random() * arr.length)];
+	}
+	while (first == mammal);
+	
+	do {
+		var second = arr[Math.floor(Math.random() * arr.length)];
+	}
+	while ( second == first || second == mammal);
 
+	var randomTwo = [first, second];
+	return randomTwo;
+}
+
+//block the click and compare animals
+function compare(item) {
+	let icon = document.querySelector('.icon');
+	let choosingBox = document.querySelectorAll('.image');
+
+	for (box of choosingBox) {
+		box.classList.add('unclickable');
+	}
+
+	message.classList.remove('invisible');
+
+	if (item == icon.classList[1]) {
+		document.querySelector('.chosen').classList.add(item);
+		document.querySelector('.chosen').classList.add('guessed');
+		document.querySelector('.chosen').classList.remove('chosen');
+		message.innerHTML = '<p>Yes! <br> It\'s right!</p><p>Next</p>';
+		message.addEventListener('click', step);
+	}
+	else {
+		message.removeEventListener('click', step);
+		message.innerHTML = '<p>No! <br> Try again!</p>';
+		setTimeout(function() {
+			for (box of choosingBox) {
+				box.classList.remove('unclickable', 'chosen');
+			}		
+		}, 1500);
+	}
 }
 
 function startAgain() {
-		document.getElementById('messages').classList.add('showMessage');
-		document.getElementById("messages").classList.add('showLastMessage');
-		document.getElementById("messages").innerHTML = '<p>All are guessed!</p> <button id="clickForReload">Play again?</button>';
-		document.getElementById("clickForReload").onclick = function() {
+	message.innerHTML = '<p>You have guessed them all!<br> Click for play again.</p>';
+	message.addEventListener("click", function() {
 			location.reload();
-		}
+	});
 }
