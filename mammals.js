@@ -91,7 +91,7 @@ function compareAnimals() {
 	selectedImage = Array.prototype.slice.call(selectedImage); //collection into array
 	if (selectedIcon[0].classList.item(0) == selectedImage[0].classList.item(0) ) {
 		selectedIcon[0].classList.remove('selected');
-		selectedIcon[0].classList.remove('icon');
+		//selectedIcon[0].classList.remove('icon');
 		selectedIcon[0].classList.add('guessed');	
 		selectedImage[0].classList.remove('selected');
 		selectedImage[0].classList.remove('image');

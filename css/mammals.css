@@ -1,0 +1,558 @@
+/* line 1, ../sass/mammals.scss */
+* {
+  user-select: none;
+}
+
+/* line 25, ../sass/mammals.scss */
+#icons, #images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+/* line 31, ../sass/mammals.scss */
+.icon {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  margin: 8px 18px;
+  background-image: url("../img/icons.jpg");
+  background-repeat: no-repeat;
+  filter: grayscale(0.8);
+  transform: scale(0.8);
+}
+/* line 41, ../sass/mammals.scss */
+.icon:hover {
+  filter: grayscale(0);
+  transition-duration: 0.5s;
+}
+/* line 51, ../sass/mammals.scss */
+.icon.selected {
+  transform: scale(1);
+  filter: grayscale(0);
+}
+/* line 54, ../sass/mammals.scss */
+.icon.guessed {
+  transform: scale(1);
+  filter: grayscale(0);
+}
+
+/* line 59, ../sass/mammals.scss */
+.image, #images .guessed {
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(0, 0, 0, 0.2);
+  color: #131313;
+  width: 250px;
+  height: 100px;
+  margin-top: 15px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  font-size: 35px;
+  transition-duration: 0.5s;
+}
+
+/* line 72, ../sass/mammals.scss */
+p {
+  margin: 0;
+}
+
+/* line 75, ../sass/mammals.scss */
+.image:hover, .image.selected, #images .guessed {
+  transition-duration: 0.5s;
+  animation: gradientBackground 3s infinite;
+  /* animation-name animation-duration animation-timing-function animadelay animation-iteration-count animation-direction; */
+  opacity: 0.5;
+}
+
+/* line 80, ../sass/mammals.scss */
+.image.selected, #images .guessed {
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  font-size: 20px;
+  transition-duration: 0.5s;
+  padding-right: 15px;
+  padding-bottom: 5px;
+}
+
+/* line 89, ../sass/mammals.scss */
+.guessed {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+/* line 93, ../sass/mammals.scss */
+.unclickable {
+  pointer-events: none;
+}
+
+/* line 97, ../sass/mammals.scss */
+#images .guessed {
+  animation: none;
+  opacity: 1;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.bear {
+  background-image: url("../img/bear.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.boar {
+  background-image: url("../img/boar.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.camel {
+  background-image: url("../img/camel.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.cat {
+  background-image: url("../img/cat.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.cow {
+  background-image: url("../img/cow.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.deer {
+  background-image: url("../img/deer.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.dog {
+  background-image: url("../img/dog.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.donkey {
+  background-image: url("../img/donkey.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.elephant {
+  background-image: url("../img/elephant.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.elk {
+  background-image: url("../img/elk.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.fox {
+  background-image: url("../img/fox.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.giraffe {
+  background-image: url("../img/giraffe.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.goat {
+  background-image: url("../img/goat.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.hamster {
+  background-image: url("../img/hamster.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.hedgehog {
+  background-image: url("../img/hedgehog.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.hippo {
+  background-image: url("../img/hippo.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.horse {
+  background-image: url("../img/horse.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.hyena {
+  background-image: url("../img/hyena.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.kangaroo {
+  background-image: url("../img/kangaroo.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.lion {
+  background-image: url("../img/lion.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.monkey {
+  background-image: url("../img/monkey.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.mouse {
+  background-image: url("../img/mouse.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.panda {
+  background-image: url("../img/panda.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.porcupine {
+  background-image: url("../img/porcupine.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.rabbit {
+  background-image: url("../img/rabbit.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.racoon {
+  background-image: url("../img/racoon.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.rhinoceros {
+  background-image: url("../img/rhinoceros.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.sheep {
+  background-image: url("../img/sheep.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.squirrel {
+  background-image: url("../img/squirrel.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.tiger {
+  background-image: url("../img/tiger.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.wolf {
+  background-image: url("../img/wolf.jpg");
+}
+
+/* line 106, ../sass/mammals.scss */
+#images .guessed.zebra {
+  background-image: url("../img/zebra.jpg");
+}
+
+/* line 111, ../sass/mammals.scss */
+#images .guessed.boar {
+  background-position-y: 0;
+}
+
+/* line 111, ../sass/mammals.scss */
+#images .guessed.camel {
+  background-position-y: 0;
+}
+
+/* line 111, ../sass/mammals.scss */
+#images .guessed.cow {
+  background-position-y: 0;
+}
+
+/* line 111, ../sass/mammals.scss */
+#images .guessed.deer {
+  background-position-y: 0;
+}
+
+/* line 111, ../sass/mammals.scss */
+#images .guessed.elk {
+  background-position-y: 0;
+}
+
+/* line 111, ../sass/mammals.scss */
+#images .guessed.giraffe {
+  background-position-y: 0;
+}
+
+/* line 111, ../sass/mammals.scss */
+#images .guessed.goat {
+  background-position-y: 0;
+}
+
+/* line 111, ../sass/mammals.scss */
+#images .guessed.horse {
+  background-position-y: 0;
+}
+
+/* line 111, ../sass/mammals.scss */
+#images .guessed.hyena {
+  background-position-y: 0;
+}
+
+/* line 111, ../sass/mammals.scss */
+#images .guessed.mouse {
+  background-position-y: 0;
+}
+
+/* line 111, ../sass/mammals.scss */
+#images .guessed.panda {
+  background-position-y: 0;
+}
+
+/* line 111, ../sass/mammals.scss */
+#images .guessed.sheep {
+  background-position-y: 0;
+}
+
+/* line 111, ../sass/mammals.scss */
+#images .guessed.tiger {
+  background-position-y: 0;
+}
+
+/* line 111, ../sass/mammals.scss */
+#images .guessed.zebra {
+  background-position-y: 0;
+}
+
+/* line 116, ../sass/mammals.scss */
+#messages {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
+/* line 128, ../sass/mammals.scss */
+.showMessage {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* line 131, ../sass/mammals.scss */
+.showMessage p, button {
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(0, 0, 0, 0.2);
+  color: #131313;
+  font-size: 10vw;
+}
+
+/* line 135, ../sass/mammals.scss */
+#messages.showLastMessage {
+  pointer-events: auto;
+}
+
+/* line 138, ../sass/mammals.scss */
+button {
+  width: 50%;
+  margin: 0 auto;
+  font-size: 5vw;
+  border-radius: 20px;
+  animation: gradientBackground 3s infinite;
+}
+
+/* line 145, ../sass/mammals.scss */
+button:focus {
+  outline: 0;
+}
+
+@keyframes gradientBackground {
+  0% {
+    background-color: #ffdede;
+    box-shadow: 0 -100px 100px -50px #b9d5b8 inset, 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
+  20% {
+    background-color: #fff6de;
+    box-shadow: 0 -100px 100px -50px #a5a7bb inset, 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
+  40% {
+    background-color: #e9f1d2;
+    box-shadow: 0 -100px 100px -50px #c9aec1 inset, 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
+  60% {
+    background-color: #8a9a9e;
+    box-shadow: 0 -100px 100px -50px #ffeedd inset, 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
+  80% {
+    background-color: #a2acad;
+    box-shadow: 0 -100px 100px -50px #fffcdd inset, 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
+  100% {
+    background-color: #ffdede;
+    box-shadow: 0 -100px 100px -50px #b9d5b8 inset, 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
+}
+/* line 188, ../sass/mammals.scss */
+.dog {
+  background-position: -100px 0;
+}
+
+/* line 191, ../sass/mammals.scss */
+.squirrel {
+  background-position: -200px 0;
+}
+
+/* line 194, ../sass/mammals.scss */
+.mouse {
+  background-position: -300px 0;
+}
+
+/* line 197, ../sass/mammals.scss */
+.cow {
+  background-position: -400px 0;
+}
+
+/* line 200, ../sass/mammals.scss */
+.horse {
+  background-position: -500px 0;
+}
+
+/* line 203, ../sass/mammals.scss */
+.sheep {
+  background-position: -600px 0;
+}
+
+/* line 206, ../sass/mammals.scss */
+.hamster {
+  background-position: -700px 0;
+}
+
+/* line 209, ../sass/mammals.scss */
+.fox {
+  background-position: 0 -100px;
+}
+
+/* line 212, ../sass/mammals.scss */
+.bear {
+  background-position: -100px -100px;
+}
+
+/* line 215, ../sass/mammals.scss */
+.racoon {
+  background-position: -200px -100px;
+}
+
+/* line 218, ../sass/mammals.scss */
+.tiger {
+  background-position: -300px -100px;
+}
+
+/* line 221, ../sass/mammals.scss */
+.lion {
+  background-position: -400px -100px;
+}
+
+/* line 224, ../sass/mammals.scss */
+.wolf {
+  background-position: -500px -100px;
+}
+
+/* line 227, ../sass/mammals.scss */
+.deer {
+  background-position: -600px -100px;
+}
+
+/* line 230, ../sass/mammals.scss */
+.elk {
+  background-position: -700px -100px;
+}
+
+/* line 233, ../sass/mammals.scss */
+.elephant {
+  background-position: 0 -200px;
+}
+
+/* line 236, ../sass/mammals.scss */
+.camel {
+  background-position: -100px -200px;
+}
+
+/* line 239, ../sass/mammals.scss */
+.boar {
+  background-position: -200px -200px;
+}
+
+/* line 242, ../sass/mammals.scss */
+.rabbit {
+  background-position: -300px -200px;
+}
+
+/* line 245, ../sass/mammals.scss */
+.donkey {
+  background-position: -400px -200px;
+}
+
+/* line 248, ../sass/mammals.scss */
+.giraffe {
+  background-position: -500px -200px;
+}
+
+/* line 251, ../sass/mammals.scss */
+.hippo {
+  background-position: -600px -200px;
+}
+
+/* line 254, ../sass/mammals.scss */
+.rhinoceros {
+  background-position: -700px -200px;
+}
+
+/* line 257, ../sass/mammals.scss */
+.panda {
+  background-position: 0 -300px;
+}
+
+/* line 260, ../sass/mammals.scss */
+.monkey {
+  background-position: -100px -300px;
+}
+
+/* line 263, ../sass/mammals.scss */
+.goat {
+  background-position: -200px -300px;
+}
+
+/* line 266, ../sass/mammals.scss */
+.hyena {
+  background-position: -300px -300px;
+}
+
+/* line 269, ../sass/mammals.scss */
+.kangaroo {
+  background-position: -400px -300px;
+}
+
+/* line 272, ../sass/mammals.scss */
+.porcupine {
+  background-position: -500px -300px;
+}
+
+/* line 275, ../sass/mammals.scss */
+.zebra {
+  background-position: -600px -300px;
+}
+
+/* line 278, ../sass/mammals.scss */
+.hedgehog {
+  background-position: -700px -300px;
+}
