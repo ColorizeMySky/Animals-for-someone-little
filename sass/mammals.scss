@@ -8,6 +8,9 @@ $mammals: bear, boar, camel, cat, cow, deer, dog, donkey,
 		  horse, hyena, kangaroo, lion, monkey, mouse, panda, porcupine,
 		  rabbit, racoon, rhinoceros, sheep, squirrel, tiger, wolf, zebra;
 $positionY: boar, camel, cow, deer, elk, giraffe, goat, horse, hyena, mouse, panda, sheep, tiger, zebra;
+$boxShadow: 0 3px 6px rgba(0, 0, 0, 0.16),
+    		0 3px 6px rgba(0, 0, 0, 0.23);
+$colorGradient: hsla(50, 70%, 90%, 1);
 
 @mixin text {
 	font: {
@@ -21,11 +24,26 @@ $positionY: boar, camel, cow, deer, elk, giraffe, goat, horse, hyena, mouse, pan
    	}
    	color: #131313;
 }
+@mixin flexColumn {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: stretch;	
+}
 
 #icons, #images {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
+}
+p {
+	margin: 0;
+}
+.guessed {
+	border: 1px solid rgba(0, 0, 0, 0.5);
+}
+.unclickable {
+	pointer-events: none;
 }
 
 .icon {
@@ -41,70 +59,59 @@ $positionY: boar, camel, cow, deer, elk, giraffe, goat, horse, hyena, mouse, pan
 	&:hover {
 		filter: grayscale(0);
 		transition-duration: 0.5s;
-	}
-	
-	@mixin size-and-color {
+	}	
+	&.selected, &.guessed {
 		transform: scale(1);
 		filter: grayscale(0);
 	}
-
-	&.selected{
-		@include size-and-color;
-	}
-	&.guessed {
-		@include size-and-color;
-	}
 }
 
-.image, #images .guessed {
+.image {
 	@include text;
+	@include flexColumn;
 	width: 250px;
 	height: 100px;
 	margin-top: 15px;
     box-sizing: border-box;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: stretch;	
 	font-size: 35px;
     transition-duration: 0.5s;
-}
-p {
-	margin: 0;
-}
-.image:hover, .image.selected, #images .guessed {
-	transition-duration: 0.5s;
-    animation: gradientBackground 3s infinite; /* animation-name animation-duration animation-timing-function animadelay animation-iteration-count animation-direction; */
-    opacity: 0.5;
-}
-.image.selected, #images .guessed{
-	flex-direction: row;
-	justify-content: flex-end;
-	align-items: flex-end;
-	font-size: 20px;
-	transition-duration: 0.5s;
-	padding-right: 15px;
-    padding-bottom: 5px;
-}
-.guessed {
-	border: 1px solid rgba(0, 0, 0, 0.5);
-}
 
-.unclickable {
-	pointer-events: none;
+    @mixin animation {
+	    animation: gradientBackground 3s infinite; /* animation-name animation-duration animation-timing-function animadelay animation-iteration-count animation-direction; */
+	    opacity: 0.5;
+	}
+	@mixin littleText {
+		flex-direction: row;
+		justify-content: flex-end;
+		align-items: flex-end;
+		font-size: 20px;
+		padding-right: 15px;
+	    padding-bottom: 5px;
+	}
+	
+	&:hover:not(.guessed) {
+		@include animation;
+	}
+	&.selected {
+		@include animation;
+		@include littleText;
+	}
+	&.guessed{
+		@include littleText;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
 }
-
-#images .guessed {
-	animation: none;
-    opacity: 1;
-	background-repeat: no-repeat;
-	background-position: center;
-}
-
 
 @each $animal in $mammals{
   	#images .guessed.#{$animal} {
     	background-image: url('../img/#{$animal}.jpg');
+	}
+
+	$i: index($mammals, $animal);
+	.icon.#{$animal} {
+		background-image: url('../img/icons.jpg');
+    	background-position: (-100px*$i)+100px 0;
 	}
 }
 @each $img in $positionY {
@@ -114,167 +121,71 @@ p {
 }
 
 #messages {
+	@include flexColumn;
 	position: absolute;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
 	pointer-events: none;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: stretch;	
+
+	&.showMessage {
+		@include text;
+		background-color: rgba(255, 255, 255, 0.5);
+		
+		p {
+			font-size: 10vw;
+		}
+	}
+	&.showLastMessage {
+		pointer-events: auto;
+	}
 }
-.showMessage {
-	background-color: rgba(255, 255, 255, 0.5);
-}
-.showMessage p, button {
-	@include text;
-	font-size: 10vw;
-}
-#messages.showLastMessage {
-	pointer-events: auto;
-}
+
+
 button {
+	@include text;
 	width: 50%;
     margin: 0 auto;
     font-size: 5vw;
     border-radius: 20px;
     animation: gradientBackground 3s infinite;
-}
-button:focus {
-	outline: 0;
+    cursor: pointer;
+	
+	&:focus {
+		outline: 0;
+	}
 }
 
 @keyframes gradientBackground {
 	0% {
-		background-color: rgba(255, 222, 222, 1);
-   	 	box-shadow: 0 -100px 100px -50px rgba(185, 213, 184, 1) inset,
-   	 				0 3px 6px rgba(0, 0, 0, 0.16),
-    				0 3px 6px rgba(0, 0, 0, 0.23);
+		background-color: $colorGradient;
+   	 	box-shadow: 0 -100px 100px -50px adjust-hue($colorGradient, 180deg) inset,
+   	 				$boxShadow;
 	}
 	20% {
-		background-color: rgba(255, 246, 222, 1);
-   	 	box-shadow: 0 -100px 100px -50px rgba(165, 167, 187, 1) inset,
-   	 				0 3px 6px rgba(0, 0, 0, 0.16),
-    				0 3px 6px rgba(0, 0, 0, 0.23);
+		background-color: adjust-hue($colorGradient, 72deg);
+   	 	box-shadow: 0 -100px 100px -50px adjust-hue($colorGradient, 252deg) inset,
+   	 				$boxShadow;
 	}
 	40% {
-		background-color: rgba(233, 241, 210, 1);
-   	 	box-shadow: 0 -100px 100px -50px rgba(201, 174, 193, 1) inset,
-   	 				0 3px 6px rgba(0, 0, 0, 0.16),
-    				0 3px 6px rgba(0, 0, 0, 0.23);
+		background-color: adjust-hue($colorGradient, 144deg);
+   	 	box-shadow: 0 -100px 100px -50px adjust-hue($colorGradient, 324deg) inset,
+   	 				$boxShadow;
 	}
 	60% {
-		background-color: rgba(138, 154, 158, 1);
-   	 	box-shadow: 0 -100px 100px -50px rgba(255, 238, 221, 1)inset,
-   	 				0 3px 6px rgba(0, 0, 0, 0.16),
-    				0 3px 6px rgba(0, 0, 0, 0.23);
+		background-color: adjust-hue($colorGradient, 216deg);
+   	 	box-shadow: 0 -100px 100px -50px adjust-hue($colorGradient, 36deg) inset,
+   	 				$boxShadow;
 	}
 	80% {
-		background-color: rgba(162, 172, 173, 1);
-   	 	box-shadow: 0 -100px 100px -50px rgba(255, 252, 221, 1) inset,
-   	 				0 3px 6px rgba(0, 0, 0, 0.16),
-    				0 3px 6px rgba(0, 0, 0, 0.23);	}
+		background-color: adjust-hue($colorGradient, 288deg);
+   	 	box-shadow: 0 -100px 100px -50px adjust-hue($colorGradient, 108deg) inset,
+   	 				$boxShadow;	
+   	}
 	100% {
-		background-color: rgba(255, 222, 222, 1);
-   	 	box-shadow: 0 -100px 100px -50px rgba(185, 213, 184, 1) inset,
-   	 				0 3px 6px rgba(0, 0, 0, 0.16),
-    				0 3px 6px rgba(0, 0, 0, 0.23);
+		background-color: $colorGradient;
+   	 	box-shadow: 0 -100px 100px -50px adjust-hue($colorGradient, 180deg) inset,
+   	 				$boxShadow;
 	}
-}
-
-//Change the image later
-.dog {
-	background-position: -100px 0;
-}
-.squirrel {
-	background-position: -200px 0;
-}
-.mouse {
-	background-position: -300px 0;
-}
-.cow {
-	background-position: -400px 0;
-}
-.horse {
-	background-position: -500px 0;
-}
-.sheep {
-	background-position: -600px 0;
-}
-.hamster {
-	background-position: -700px 0;
-}
-.fox {
-	background-position: 0 -100px;
-}
-.bear {
-	background-position: -100px -100px;
-}
-.racoon {
-	background-position: -200px -100px;
-}
-.tiger {
-	background-position: -300px -100px;
-}
-.lion {
-	background-position: -400px -100px;
-}
-.wolf {
-	background-position: -500px -100px;
-}
-.deer {
-	background-position: -600px -100px;
-}
-.elk {
-	background-position: -700px -100px;
-}
-.elephant {
-	background-position: 0 -200px;
-}
-.camel {
-	background-position: -100px -200px;
-}
-.boar {
-	background-position: -200px -200px;
-}
-.rabbit {
-	background-position: -300px -200px;
-}
-.donkey {
-	background-position: -400px -200px;
-}
-.giraffe {
-	background-position: -500px -200px;
-}
-.hippo {
-	background-position: -600px -200px;
-}
-.rhinoceros {
-	background-position: -700px -200px;
-}
-.panda {
-	background-position: 0 -300px;
-}
-.monkey {
-	background-position: -100px -300px;
-}
-.goat {
-	background-position: -200px -300px;
-}
-.hyena {
-	background-position: -300px -300px;
-}
-.kangaroo {
-	background-position: -400px -300px;
-}
-.porcupine {
-	background-position: -500px -300px;
-}
-.zebra {
-	background-position: -600px -300px;
-}
-.hedgehog {
-	background-position: -700px -300px;
 }

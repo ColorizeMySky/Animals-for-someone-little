@@ -1,128 +1,111 @@
-var iconsArray = document.getElementsByClassName('icon');
-var imagesArray = document.getElementsByClassName('image');
-iconsArray = Array.prototype.slice.call(iconsArray); //collection into array
-imagesArray = Array.prototype.slice.call(imagesArray);
-addFlexOrder(setRandomOrder(iconsArray));
-addFlexOrder(setRandomOrder(imagesArray));
+var mammals = ['bear', 'boar', 'camel', 'cat', 'cow', 'deer', 'dog', 'donkey',
+			   'elephant', 'elk', 'fox', 'giraffe', 'goat', 'hamster', 'hedgehog', 'hippo',
+			   'horse', 'hyena', 'kangaroo', 'lion', 'monkey', 'mouse', 'panda', 'porcupine',
+			   'rabbit', 'racoon', 'rhinoceros', 'sheep', 'squirrel', 'tiger', 'wolf', 'zebra'];
+var iconsArray = document.querySelectorAll('.icon');
+var imagesArray = document.querySelectorAll('.image');
 
-//choose a icon of animal
-for (var i = 0; i < iconsArray.length; i++) {
-	iconsArray[i].onclick = function(){
-		if(this.classList.length > 2) {
-			var alredySelected = true;
-		}
-		else {
-			var alredySelected = false;
-		}
-		var selectedIcon = document.getElementsByClassName('icon selected');
-		selectedIcon = Array.prototype.slice.call(selectedIcon); //collection into array
-		for (var j = 0; j < selectedIcon.length; j++) {
-			selectedIcon[j].classList.remove('selected');
-		}
-		if (alredySelected == false) {
-			this.classList.add('selected');
-		}
-    	checkSelecting();
-	};
-}
+mammals.sort(compareRandom);
 
-//choose a image of animal
-for (var i = 0; i < imagesArray.length; i++) {
-	imagesArray[i].onclick = function(){
-		if(this.classList.length > 2) {
-			var alredySelected = true;
-		}
-		else {
-			var alredySelected = false;
-		}
-		var selectedImage = document.getElementsByClassName('image selected');
-		selectedImage = Array.prototype.slice.call(selectedImage); //collection into array
-		for (var j = 0; j < selectedImage.length; j++) {
-			selectedImage[j].classList.remove('selected');
-		}		
-    	if (alredySelected == false) {
-			this.classList.add('selected');
-		}   
-    	checkSelecting(); 	
-	};
+//IMPORTANT! Check before, that mammals.length == iconsArray.length
+for (let i = 0; i < iconsArray.length; i++) {
+	iconsArray[i].classList.add(mammals[i]);
+	iconsArray[i].addEventListener('click', function(){
+		toggleClass(iconsArray[i], 'icon');
+	});		
 }
 
 
-//random shuffle of array elements
-function setRandomOrder(array) {
-	var currentIndex = array.length, temporaryValue, randomIndex;
-
-	// While there remain elements to shuffle...
-	while (0 !== currentIndex) {
-		// Pick a remaining element...
-		randomIndex = Math.floor(Math.random() * currentIndex);
-		currentIndex -= 1;
-		// And swap it with the current element.
-		temporaryValue = array[currentIndex];
-		array[currentIndex] = array[randomIndex];
-		array[randomIndex] = temporaryValue;
-	}
-	return array;
+mammals.sort(compareRandom);
+//IMPORTANT! Check before, that mammals.length == imagesArray.length
+for (let i = 0; i < imagesArray.length; i++) {
+	imagesArray[i].classList.add(mammals[i]);
+	imagesArray[i].innerHTML = '<p>' + mammals[i] + '</p>';
+	imagesArray[i].addEventListener('click', function(){
+		toggleClass(imagesArray[i], 'image');
+	});	
 }
 
-//add to flex-elements the css style 'order' 
-function addFlexOrder(array) {
-	for (var i = 0; i < array.length; i++) {
-		array[i].style.order = i;
-	}
+
+function compareRandom(a, b) {
+  return Math.random() - 0.5;
 }
 
-//check if comparee is needed
-function checkSelecting() {
-	if ( (document.getElementsByClassName('icon selected').length > 0) && (document.getElementsByClassName('image selected').length > 0) ) {
-		setTimeout(compareAnimals(), 1000);
-	}
+function toggleClass(item, subclass) {	
+		let earlySelected = document.querySelectorAll('.' + subclass + '.selected');
+
+		earlySelected.forEach(function(elem) {
+			if (elem != item) {
+				elem.classList.remove('selected');
+			}
+		});		
+
+		item.classList.toggle('selected');
+
+
+		if ( !!document.querySelectorAll('.icon.selected')[0] && !!document.querySelectorAll('.image.selected')[0]) {
+			setTimeout(compareAnimals(), 1000);
+		}
 }
 
 
 //block the click and compare animals
 function compareAnimals() {
-	document.getElementById('icons').classList.add('unclickable');
-	document.getElementById('images').classList.add('unclickable');
-
-	var selectedIcon = document.getElementsByClassName('icon selected');
-	selectedIcon = Array.prototype.slice.call(selectedIcon); //collection into array
-	var selectedImage = document.getElementsByClassName('image selected');
-	selectedImage = Array.prototype.slice.call(selectedImage); //collection into array
-	if (selectedIcon[0].classList.item(0) == selectedImage[0].classList.item(0) ) {
-		selectedIcon[0].classList.remove('selected');
-		//selectedIcon[0].classList.remove('icon');
-		selectedIcon[0].classList.add('guessed');	
-		selectedImage[0].classList.remove('selected');
-		selectedImage[0].classList.remove('image');
-		selectedImage[0].classList.add('guessed');
-		attemptMessage('Yes!');		
+	for (icon of iconsArray) {
+		icon.classList.add('unclickable');
 	}
+	for (image of imagesArray) {
+		image.classList.add('unclickable');
+	}
+
+	let selectedIcon = document.querySelector('.icon.selected');
+	let selectedImage = document.querySelector('.image.selected');
+
+	if (selectedIcon.classList.item(1) == selectedImage.classList.item(1) ) {
+		selectedIcon.classList.remove('selected');
+		selectedIcon.classList.add('guessed');
+
+		selectedImage.classList.remove('selected');
+		selectedImage.classList.add('guessed');
+
+		attemptMessage('Yes!');		
+	}	
 	else {
 		attemptMessage('No!');
 	}
-	document.getElementById('icons').classList.remove('unclickable');
-	document.getElementById('images').classList.remove('unclickable');
+
+	setTimeout(function() {
+		for (icon of iconsArray) {
+			icon.classList.remove('unclickable');
+		}
+		for (image of imagesArray) {
+			image.classList.remove('unclickable');
+		}
+	}, 1500);
 }
 
 function attemptMessage(text) {
-	document.getElementById("messages").innerHTML = '<p>' + text + '</p>';
-	document.getElementById('messages').classList.add('showMessage');
+	let message = document.querySelector('#messages');
+
+	message.innerHTML = '<p>' + text + '</p>';
+	message.classList.add('showMessage');
+
 	setTimeout(function() {
-		document.getElementById('messages').classList.remove('showMessage');
-		document.getElementById("messages").innerHTML = '';
-		if (document.getElementsByClassName('guessed').length == 64) {
-			setTimeout(startAgain(), 4000);
+		message.classList.remove('showMessage');
+		message.innerHTML = '';
+		if (document.querySelectorAll('.guessed').length == iconsArray.length*2) {
+			setTimeout(startAgain(), 3000);
 		}
-	}, 2000);
+	}, 1500);
 
 }
 
 function startAgain() {
-		document.getElementById('messages').classList.add('showMessage');
-		document.getElementById("messages").classList.add('showLastMessage');
-		document.getElementById("messages").innerHTML = '<p>All are guessed!</p> <button id="clickForReload">Play again?</button>';
-		document.getElementById("clickForReload").onclick = function() {
-			location.reload();
-		}
+	let message = document.querySelector('#messages');
+	message.classList.add('showMessage');
+	message.classList.add('showLastMessage');
+	message.innerHTML = '<p>All are guessed!</p> <button>Play again?</button>';
+	document.querySelector('button').onclick = function() {
+		location.reload();
+	}
 }
